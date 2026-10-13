@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-08-02T04:46:27.240770+00:00",
+  "nodes": {
+    "index_guest_menu": {
+      "code_fingerprint": "9b358e8b46bc57059acf0b5eaa3d8206c58f19c720487411bfbf4874668eb00c",
+      "label": "Guest Menu",
+      "last": "2026-08-01T19:02:43.586284+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T19:02:43.586284+00:00",
+          "outcome": "useful",
+          "q": "Are the nine Zestt visual chapters generic white-labelled ideas, and do you know how Zestt looks?"
+        }
+      ],
+      "score": 0.990677772,
+      "source_file": "index.html",
+      "status": "tentative",
+      "uses": 1
+    },
+    "index_restaurant_tenant": {
+      "code_fingerprint": "9b358e8b46bc57059acf0b5eaa3d8206c58f19c720487411bfbf4874668eb00c",
+      "label": "Restaurant Tenant and Branding",
+      "last": "2026-08-01T19:02:43.586284+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T19:02:43.586284+00:00",
+          "outcome": "useful",
+          "q": "Are the nine Zestt visual chapters generic white-labelled ideas, and do you know how Zestt looks?"
+        }
+      ],
+      "score": 0.990677772,
+      "source_file": "index.html",
+      "status": "tentative",
+      "uses": 1
+    },
+    "index_zestt": {
+      "code_fingerprint": "9b358e8b46bc57059acf0b5eaa3d8206c58f19c720487411bfbf4874668eb00c",
+      "label": "Zestt",
+      "last": "2026-08-01T19:02:43.586284+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T19:02:43.586284+00:00",
+          "outcome": "useful",
+          "q": "Are the nine Zestt visual chapters generic white-labelled ideas, and do you know how Zestt looks?"
+        }
+      ],
+      "score": 0.990677772,
+      "source_file": "index.html",
+      "status": "tentative",
+      "uses": 1
+    },
+    "index_zestt_admin": {
+      "code_fingerprint": "9b358e8b46bc57059acf0b5eaa3d8206c58f19c720487411bfbf4874668eb00c",
+      "label": "Zestt Admin",
+      "last": "2026-08-01T19:02:43.586284+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T19:02:43.586284+00:00",
+          "outcome": "useful",
+          "q": "Are the nine Zestt visual chapters generic white-labelled ideas, and do you know how Zestt looks?"
+        }
+      ],
+      "score": 0.990677772,
+      "source_file": "index.html",
+      "status": "tentative",
+      "uses": 1
+    }
+  },
+  "version": 1
+}

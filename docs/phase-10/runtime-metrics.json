@@ -1,0 +1,332 @@
+{
+  "capturedAt": "2026-08-03T07:54:43.471Z",
+  "conditions": {
+    "browser": "Google Chrome headless via Playwright",
+    "server": "http://127.0.0.1:4174",
+    "dpr": "reported per viewport; no device emulation beyond viewport size",
+    "note": "Lab evidence for Phase 10 hardening; not field p75 and not visual approval."
+  },
+  "bundles": [
+    {
+      "file": "dist/index.html",
+      "bytes": 74971,
+      "gzipBytes": 16513
+    },
+    {
+      "file": "dist/assets/index-C3AM6aab.css",
+      "bytes": 121435,
+      "gzipBytes": 22938
+    },
+    {
+      "file": "dist/assets/index-Cl-v4Gt9.js",
+      "bytes": 94614,
+      "gzipBytes": 24921
+    }
+  ],
+  "captures": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "anchor": "hero",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 1440,
+        "height": 1620
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2196318,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.667346938775513,
+        "p95Ms": 17.300000000000182,
+        "maxMs": 17.600000000000136
+      }
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "anchor": "contact",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 1440,
+        "height": 1620
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2603258,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.667346938775506,
+        "p95Ms": 17.200000000000273,
+        "maxMs": 17.600000000000364
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "anchor": "hero",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 1024,
+        "height": 1382
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2704626,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.667346938775506,
+        "p95Ms": 17.59999999999991,
+        "maxMs": 17.700000000000728
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "anchor": "contact",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 1024,
+        "height": 1382
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2783950,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.665306122448985,
+        "p95Ms": 16.899999999999636,
+        "maxMs": 17.699999999999818
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "anchor": "hero",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 390,
+        "height": 1266
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2404506,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.667346938775506,
+        "p95Ms": 16.800000000000182,
+        "maxMs": 16.800000000000182
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "anchor": "contact",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 390,
+        "height": 1266
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2479330,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.665306122448985,
+        "p95Ms": 17.299999999999272,
+        "maxMs": 17.600000000000364
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "anchor": "hero",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 320,
+        "height": 908
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2557422,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.663265306122447,
+        "p95Ms": 16.80000000000109,
+        "maxMs": 17.700000000000728
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 568
+      },
+      "anchor": "contact",
+      "navigation": {
+        "responseStart": 20.299999952316284,
+        "domContentLoaded": 315.2999999523163,
+        "load": 317.7000000476837,
+        "transferSize": 16813
+      },
+      "paints": {
+        "first-paint": 268,
+        "first-contentful-paint": 268
+      },
+      "longTasks": 0,
+      "layoutShift": 0,
+      "resources": {
+        "count": 2,
+        "encodedBytes": 47859,
+        "transferBytes": 48459
+      },
+      "canvas": {
+        "width": 320,
+        "height": 908
+      },
+      "dpr": 1,
+      "webgl": "true",
+      "performanceState": "stable",
+      "heapUsed": 2614562,
+      "frames": {
+        "count": 49,
+        "averageMs": 16.667346938775488,
+        "p95Ms": 17.30000000000109,
+        "maxMs": 17.399999999999636
+      }
+    }
+  ]
+}

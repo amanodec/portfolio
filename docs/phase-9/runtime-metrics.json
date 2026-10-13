@@ -1,0 +1,28 @@
+{
+  "captured": "2026-08-03",
+  "build": {
+    "distHtmlGzipKb": 16.51,
+    "distCssGzipKb": 22.94,
+    "distJsGzipKb": 24.06,
+    "cssJsGzipKb": 47.0
+  },
+  "runtime": [
+    {
+      "tier": "desktop",
+      "viewport": "1440x900",
+      "devicePixelRatio": 1,
+      "canvas": "1440x1620",
+      "frameIntervalMs": { "min": 15.7, "max": 17.6 },
+      "longTasks": 0
+    },
+    {
+      "tier": "mobile",
+      "viewport": "390x844",
+      "devicePixelRatio": 1,
+      "canvas": "390x1266",
+      "frameIntervalMs": { "min": 15.8, "max": 17.6 },
+      "longTasks": 0
+    }
+  ],
+  "note": "Read-only Chrome measurements on the local Vite build. These are objective technical evidence, not visual approval."
+}

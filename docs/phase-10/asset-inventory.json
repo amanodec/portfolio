@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-08-03",
+  "initialCriticalPayload": {
+    "htmlGzipBytes": 16513,
+    "cssGzipBytes": 22938,
+    "jsGzipBytes": 24921,
+    "cssAndJsGzipBytes": 47859
+  },
+  "assets": [
+    {
+      "path": "assets/zestt/guest-walkthrough.mp4",
+      "bytes": 909184,
+      "role": "optional optimized guest-experience recording",
+      "initialRequest": false,
+      "loading": "metadata-only when the Zestt world enters",
+      "failureContract": "failed/aborted state with honest source fallback"
+    }
+  ],
+  "fonts": [],
+  "images": [],
+  "textures": [],
+  "models": [],
+  "notes": [
+    "The current build requests no production font, image, texture or model assets.",
+    "The optional optimized MP4 is not part of the initial critical request set."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "script.js": {
+    "mtime": 1783679213.2384834,
+    "ast_hash": "972dc9392c155e910e2047888a5ed13f",
+    "semantic_hash": "972dc9392c155e910e2047888a5ed13f"
+  },
+  "index.html": {
+    "mtime": 1783681394.7140863,
+    "ast_hash": "230bc8d95b34e58ad11f94b591a9cb4c",
+    "semantic_hash": "230bc8d95b34e58ad11f94b591a9cb4c"
+  }
+}

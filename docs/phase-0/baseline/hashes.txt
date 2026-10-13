@@ -1,0 +1,8 @@
+Phase 0 website-source hash record — 2026-08-02
+
+These are the pre- and post-phase hashes for website implementation files. They must remain unchanged while Phase 0 produces planning evidence.
+
+9b2c946fbf98b29df29b6777914efd8e740eb0d2f7a597f505096285b4474f68  index.html
+dfe8eb347ff1ef723165c5a861f578143fd3d1faca81c3294d3f73ae42accbba  style.css
+d3152b89b2f52a80bcc93aef3e2eaf9eaa2667a28ef32dbf28517659bb62d5dc  script.js
+9e1d3bc3e27f9ef29f305df98977cab20f6c0dc0091520f9ab0d2a19181cdc44  qa.mjs

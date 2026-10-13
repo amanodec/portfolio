@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Scene 1 — Zestt, built by Aman — portrait</title>
+  <desc id="desc">Phase 0 storyboard proposal. Not a production capture.</desc>
+  <style>
+    .eyebrow { font: 500 18px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; fill: #ff5a1f; text-transform: uppercase; }
+    .title { font: 600 50px Arial, sans-serif; letter-spacing: -.04em; fill: #f1efe8; }
+    .beat { font: 400 28px Arial, sans-serif; fill: #f1efe8; opacity: .82; }
+    .meta { font: 500 15px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; fill: #f1efe8; opacity: .58; }
+  </style>
+  <rect width="900" height="1200" fill="#08090c"/>
+  <g opacity=".12" stroke="#f1efe8" stroke-width="1"><path d="M 54 192 V 936"/><path d="M 167.14285714285714 192 V 936"/><path d="M 280.2857142857143 192 V 936"/><path d="M 393.42857142857144 192 V 936"/><path d="M 506.57142857142856 192 V 936"/><path d="M 619.7142857142857 192 V 936"/><path d="M 732.8571428571429 192 V 936"/><path d="M 846 192 V 936"/></g>
+  <rect x="54" y="228" width="792" height="624" rx="28" fill="#14161c" stroke="#f1efe8" stroke-opacity=".16"/><rect x="82" y="276" width="736" height="144" fill="#ff5a1f" opacity=".12"/>
+  <path d="M 280 636 C 350 256, 540 776, 640 436" fill="none" stroke="#ff5a1f" stroke-width="18" stroke-linecap="round" opacity=".92"/><path d="M 330 666 C 440 336, 600 736, 600 396" fill="none" stroke="#f1efe8" stroke-width="3" opacity=".58"/>
+  <text x="54" y="86" class="eyebrow">PROPOSAL / PHASE 0 / portrait</text>
+  <text x="54" y="140" class="title">Scene 1 — Zestt, built by Aman</text>
+  <text x="54" y="182" class="beat">Emotional beat: awe.</text>
+  <text x="54" y="1052" class="meta">BACKGROUND / SIGNAL / DOM PLANE</text><text x="54" y="1096" class="meta">TOUCH EQUIVALENT · SHORT CAMERA ARC</text>
+  </svg>

@@ -1,0 +1,152 @@
+@layer sections {
+  .spatial-experience {
+    --experience-progress: 0;
+    --experience-line-progress: 0;
+    --experience-line-color: #ff5a1f;
+    background: #08090c;
+    color: #f1efe8;
+    min-height: clamp(1200px, 145vh, 1680px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .spatial-experience::before {
+    background: radial-gradient(circle at calc(72% - var(--experience-progress) * 32%) 28%, rgba(65, 105, 255, .17), transparent 28%), linear-gradient(105deg, transparent 0 36%, rgba(141, 92, 255, .08) 52%, transparent 74%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .experience-shell { position: relative; z-index: 1; }
+  .experience-heading { border-top: 1px solid rgba(241, 239, 232, .2); padding-top: 20px; }
+  .experience-heading > div { align-items: center; display: flex; }
+  .experience-heading .section-number, .experience-heading .eyebrow { color: rgba(241, 239, 232, .62); }
+  .experience-heading h2 { font-size: clamp(48px, 7vw, 100px); margin: clamp(42px, 6vw, 86px) 0 25px; max-width: 840px; }
+  .experience-heading h2 em { color: #ff5a1f; }
+  .experience-heading > p { color: rgba(241, 239, 232, .68); font-size: 13px; line-height: 1.8; max-width: 540px; }
+  .experience-coordinate { color: rgba(241, 239, 232, .42); display: flex; font: 9px var(--mono); gap: 20px; justify-content: space-between; letter-spacing: .12em; margin-top: 25px; text-transform: uppercase; }
+
+  .experience-journey { display: grid; gap: 1px; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); margin-top: clamp(70px, 10vw, 130px); }
+  .experience-spatial-plane { background: #10131a; border: 1px solid rgba(241, 239, 232, .18); min-height: 560px; overflow: hidden; position: relative; }
+  .experience-spatial-plane::before { background-image: linear-gradient(rgba(241, 239, 232, .07) 1px, transparent 1px), linear-gradient(90deg, rgba(241, 239, 232, .07) 1px, transparent 1px); background-size: 52px 52px; content: ""; inset: -12%; opacity: .5; position: absolute; transform: perspective(600px) rotateX(58deg) translateY(24%); transform-origin: center bottom; }
+  .experience-spatial-plane::after { border: 1px solid color-mix(in srgb, var(--active-role-color, #ff5a1f) 40%, transparent); border-radius: 50%; content: ""; height: 360px; left: 50%; opacity: .3; position: absolute; top: 50%; transform: translate(-50%, -50%) scale(calc(.86 + var(--experience-progress) * .14)); transition: border-color .5s var(--ease), transform .8s var(--ease); width: 360px; }
+  .experience-spatial-label { color: rgba(241, 239, 232, .48); font: 9px var(--mono); letter-spacing: .13em; position: absolute; text-transform: uppercase; z-index: 3; }
+  .experience-spatial-label.top { left: 22px; top: 20px; }
+  .experience-spatial-label.bottom { bottom: 20px; right: 22px; }
+
+  .experience-year-anchor { left: 50%; pointer-events: none; position: absolute; text-align: center; top: 22%; transform: translateX(-50%); z-index: 2; }
+  .experience-year-anchor span { color: rgba(241, 239, 232, .9); display: block; font: 600 clamp(96px, 17vw, 230px)/.78 var(--display); letter-spacing: -.1em; transition: color .4s var(--ease); }
+  .experience-year-anchor small { color: rgba(241, 239, 232, .42); display: block; font: 8px var(--mono); letter-spacing: .18em; margin-top: 25px; text-transform: uppercase; }
+  .experience-path { height: 220px; left: 7%; overflow: visible; position: absolute; top: 52%; width: 86%; z-index: 3; }
+  .experience-path-base, .experience-path-active { fill: none; stroke-linecap: round; stroke-width: 2; }
+  .experience-path-base { stroke: rgba(241, 239, 232, .16); }
+  .experience-path-active { stroke: var(--active-role-color, #ff5a1f); stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--experience-line-progress)); transition: stroke .35s var(--ease), stroke-dashoffset .15s linear; }
+
+  .experience-role-stop { align-items: center; background: #08090c; border: 1px solid rgba(241, 239, 232, .36); border-radius: 50%; color: #f1efe8; cursor: pointer; display: flex; height: 54px; justify-content: center; position: absolute; top: 53%; transform: translate(-50%, -50%) scale(.9); transition: background .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease), transform .45s var(--ease), opacity .35s var(--ease); width: 54px; z-index: 4; }
+  .experience-role-stop::before { background: var(--role-color); border-radius: inherit; content: ""; inset: 11px; opacity: .34; position: absolute; transition: opacity .35s; }
+  .experience-role-stop span { font: 9px var(--mono); position: relative; z-index: 1; }
+  .experience-role-stop[data-role-stop="rain-platforms"] { left: 11%; top: 53%; }
+  .experience-role-stop[data-role-stop="superchat"] { left: 50%; top: 35%; }
+  .experience-role-stop[data-role-stop="fleapo"] { left: 89%; top: 53%; }
+  .experience-role-stop.is-active { border-color: var(--role-color); box-shadow: 0 0 0 8px color-mix(in srgb, var(--role-color) 14%, transparent), 0 0 42px color-mix(in srgb, var(--role-color) 38%, transparent); transform: translate(-50%, -50%) scale(1.16); }
+  .experience-role-stop.is-active::before { opacity: .8; }
+  .experience-role-stop.is-visited:not(.is-active) { border-color: color-mix(in srgb, var(--role-color) 62%, rgba(241, 239, 232, .3)); }
+  .experience-role-stop:focus-visible { outline: 2px solid #f1efe8; outline-offset: 5px; }
+  .spatial-experience[data-preview-role="rain-platforms"] .experience-role-stop[data-role-stop="rain-platforms"],
+  .spatial-experience[data-preview-role="superchat"] .experience-role-stop[data-role-stop="superchat"],
+  .spatial-experience[data-preview-role="fleapo"] .experience-role-stop[data-role-stop="fleapo"] { transform: translate(-50%, -50%) scale(1.08); }
+
+  .experience-role-label { color: rgba(241, 239, 232, .5); display: flex; font: 8px var(--mono); justify-content: space-between; left: 7%; letter-spacing: .12em; position: absolute; right: 7%; text-transform: uppercase; top: 72%; z-index: 3; }
+  .experience-role-label span:nth-child(2) { color: var(--active-role-color, #ff5a1f); }
+  .experience-journey-ui { background: #f1efe8; color: #201611; display: flex; flex-direction: column; min-height: 560px; padding: clamp(24px, 4vw, 48px); }
+  .experience-journey-ui > .mono-label { color: #8c796d; }
+  .experience-role-controls { border-bottom: 1px solid rgba(32, 22, 17, .17); display: grid; gap: 4px; grid-template-columns: repeat(3, 1fr); margin-top: 32px; padding-bottom: 18px; }
+  .experience-role-control { background: transparent; border: 1px solid transparent; color: #8c796d; cursor: pointer; min-height: 58px; padding: 9px 7px; text-align: left; transition: background .25s, border-color .25s, color .25s; }
+  .experience-role-control span { display: block; font: 8px var(--mono); }
+  .experience-role-control strong { display: block; font: 500 14px/1.05 var(--display); margin-top: 7px; }
+  .experience-role-control:hover, .experience-role-control:focus-visible, .experience-role-control.is-active { background: rgba(184, 84, 48, .08); border-color: var(--active-role-color, #b85430); color: #201611; }
+  .experience-role-control:focus-visible { outline: 2px solid #b85430; outline-offset: 3px; }
+  .experience-role-content { flex: 1; margin-top: 28px; }
+  .experience-role[hidden] { display: none; }
+  .experience-role time { color: #8c796d; font: 9px var(--mono); }
+  .experience-role-meta { color: #b85430; font: 9px var(--mono); letter-spacing: .1em; margin: 12px 0; text-transform: uppercase; }
+  .experience-role h3 { color: #201611; font-size: clamp(30px, 3.8vw, 52px); line-height: .98; margin: 0; max-width: 340px; }
+  .experience-role-summary { color: #6f5b4e; font-size: 12px; line-height: 1.7; margin-top: 20px; }
+  .experience-result { border-top: 1px solid rgba(32, 22, 17, .17); margin-top: 26px; padding-top: 18px; }
+  .experience-result dt { color: #8c796d; font: 8px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+  .experience-result dd { color: #6f5b4e; font-size: 11px; line-height: 1.6; margin-top: 7px; }
+  .experience-result cite { color: #8c796d; display: block; font: 8px/1.45 var(--mono); font-style: normal; margin-top: 6px; }
+  .experience-technologies { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin-top: 22px; }
+  .experience-technologies li { border: 1px solid rgba(32, 22, 17, .18); color: #6f5b4e; font: 8px var(--mono); padding: 8px 9px; }
+  .experience-role-nav { align-items: center; border-top: 1px solid rgba(32, 22, 17, .17); display: flex; gap: 8px; justify-content: space-between; margin-top: 28px; padding-top: 18px; }
+  .experience-role-nav a, .experience-role-nav button { background: transparent; border: 0; color: #6f5b4e; cursor: pointer; font: 8px var(--mono); min-height: 44px; padding: 8px 0; text-decoration: none; text-transform: uppercase; }
+  .experience-role-nav a:hover, .experience-role-nav button:hover:not(:disabled), .experience-role-nav a:focus-visible, .experience-role-nav button:focus-visible { color: #b85430; }
+  .experience-role-nav button:disabled { color: #bfb1a8; cursor: not-allowed; }
+  .experience-role-nav a:focus-visible, .experience-role-nav button:focus-visible { outline: 2px solid #b85430; outline-offset: 3px; }
+
+  .experience-exit { align-items: center; color: rgba(241, 239, 232, .55); display: flex; font: 9px var(--mono); gap: 14px; letter-spacing: .1em; margin-top: clamp(46px, 7vw, 90px); text-transform: uppercase; }
+  .experience-exit i { background: #ff5a1f; display: block; height: 1px; flex: 1; }
+  .experience-exit a { color: #f1efe8; text-decoration: none; }
+  .experience-exit a:hover, .experience-exit a:focus-visible { color: #ff5a1f; }
+  .experience-playground-anchor { color: rgba(241, 239, 232, .34); font: 8px var(--mono); letter-spacing: .12em; margin-top: 24px; text-transform: uppercase; }
+
+  .spatial-experience[data-experience-state="entry"] .experience-path-active { stroke-dashoffset: 1; }
+  .spatial-experience[data-experience-state="exit"] .experience-spatial-plane::after { opacity: .12; transform: translate(-50%, -50%) scale(.86); }
+}
+
+@layer responsive {
+  @media (max-width: 980px) {
+    .experience-journey { grid-template-columns: 1fr; }
+    .experience-spatial-plane, .experience-journey-ui { min-height: 500px; }
+    .experience-role-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 600px) {
+    .spatial-experience { min-height: auto; }
+    .experience-coordinate { align-items: flex-start; flex-direction: column; gap: 6px; }
+    .experience-journey { margin-top: 56px; }
+    .experience-spatial-plane { min-height: 470px; }
+    .experience-spatial-plane::after { height: 240px; width: 240px; }
+    .experience-year-anchor { top: 24%; }
+    .experience-year-anchor span { font-size: clamp(92px, 28vw, 140px); }
+    .experience-path { height: 300px; left: 13%; top: 44%; transform: rotate(90deg); transform-origin: center; width: 74%; }
+    .experience-role-stop[data-role-stop="rain-platforms"] { left: 24%; top: 28%; }
+    .experience-role-stop[data-role-stop="superchat"] { left: 50%; top: 54%; }
+    .experience-role-stop[data-role-stop="fleapo"] { left: 76%; top: 78%; }
+    .experience-role-label { bottom: 20px; flex-direction: column; gap: 7px; left: 22px; right: auto; top: auto; }
+    .experience-role-label span:nth-child(2) { order: -1; }
+    .experience-journey-ui { min-height: 0; padding: 26px 20px; }
+    .experience-role-controls { grid-template-columns: 1fr; margin-top: 24px; }
+    .experience-role-control { min-height: 52px; }
+    .experience-role-control strong { font-size: 15px; }
+    .experience-role-nav { align-items: flex-start; flex-wrap: wrap; }
+    .experience-role-nav a { flex-basis: 100%; order: -1; }
+    .experience-exit { align-items: flex-start; flex-wrap: wrap; }
+    .experience-exit i { flex-basis: 100%; order: 3; }
+  }
+
+  @media (forced-colors: active) {
+    .spatial-experience { background: Canvas; color: CanvasText; }
+    .experience-spatial-plane, .experience-journey-ui, .experience-role-control, .experience-role-stop { border-color: CanvasText; }
+    .experience-role-control.is-active, .experience-role-control:focus-visible, .experience-role-stop:focus-visible { outline: 2px solid Highlight; }
+    .experience-role-stop.is-active { background: Highlight; color: HighlightText; box-shadow: none; }
+    .experience-journey-ui, .experience-role h3 { background: Canvas; color: CanvasText; }
+    .experience-role-summary, .experience-result dd { color: CanvasText; }
+  }
+}
+
+@layer motion {
+  html[data-effects="reduced"] .experience-spatial-plane::after,
+  html[data-effects="reduced"] .experience-year-anchor span,
+  html[data-effects="reduced"] .experience-path-active,
+  html[data-effects="reduced"] .experience-role-stop,
+  html[data-effects="reduced"] .experience-role-control { transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html:not([data-effects-preference="full"]) .experience-spatial-plane::after,
+    html:not([data-effects-preference="full"]) .experience-year-anchor span,
+    html:not([data-effects-preference="full"]) .experience-path-active,
+    html:not([data-effects-preference="full"]) .experience-role-stop,
+    html:not([data-effects-preference="full"]) .experience-role-control { transition: none; }
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Scene 6 — Interaction playground — reduced-motion</title>
+  <desc id="desc">Phase 0 storyboard proposal. Not a production capture.</desc>
+  <style>
+    .eyebrow { font: 500 18px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; fill: #c8ff36; text-transform: uppercase; }
+    .title { font: 600 62px Arial, sans-serif; letter-spacing: -.04em; fill: #f1efe8; }
+    .beat { font: 400 28px Arial, sans-serif; fill: #f1efe8; opacity: .82; }
+    .meta { font: 500 15px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .08em; fill: #f1efe8; opacity: .58; }
+  </style>
+  <rect width="1600" height="1000" fill="#14161c"/>
+  <g opacity=".12" stroke="#f1efe8" stroke-width="1"><path d="M 84 160 V 780"/><path d="M 214.1818181818182 160 V 780"/><path d="M 344.3636363636364 160 V 780"/><path d="M 474.54545454545456 160 V 780"/><path d="M 604.7272727272727 160 V 780"/><path d="M 734.909090909091 160 V 780"/><path d="M 865.0909090909091 160 V 780"/><path d="M 995.2727272727273 160 V 780"/><path d="M 1125.4545454545455 160 V 780"/><path d="M 1255.6363636363637 160 V 780"/><path d="M 1385.818181818182 160 V 780"/><path d="M 1516 160 V 780"/></g>
+  <rect x="672" y="180" width="768" height="580" rx="34" fill="#14161c" stroke="#f1efe8" stroke-opacity=".16"/><rect x="128" y="290" width="576" height="280" fill="#c8ff36" opacity=".08"/>
+  <circle cx="1008" cy="480" r="54" fill="#c8ff36" opacity=".88"/><circle cx="1008" cy="480" r="96" fill="none" stroke="#c8ff36" stroke-width="2" opacity=".45"/>
+  <text x="84" y="92" class="eyebrow">PROPOSAL / PHASE 0 / reduced-motion</text>
+  <text x="84" y="154" class="title">Scene 6 — Interaction playground</text>
+  <text x="84" y="202" class="beat">Emotional beat: play.</text>
+  <text x="84" y="852" class="meta">BACKGROUND / SIGNAL / DOM PLANE / FOREGROUND</text><text x="84" y="896" class="meta">SCROLL ALLOCATION · STILL + OPACITY</text>
+  </svg>
