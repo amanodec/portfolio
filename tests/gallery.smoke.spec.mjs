@@ -18,12 +18,12 @@ test('portfolio renders its work and contact without errors or eager video downl
 
 test('project notes open with keyboard and return focus to the trigger', async ({ page }) => {
   await page.goto('/');
-  const trigger = page.locator('[data-project="trading-leagues"]');
+  const trigger = page.locator('[data-project="wedding-save-the-date"]');
   await trigger.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#project-dialog')).toBeVisible();
-  await expect(page.locator('#dialog-title')).toHaveText('Trading Leagues');
-  await expect(page.locator('.dialog-visit')).toHaveAttribute('href', 'https://tradingleagues.app');
+  await expect(page.locator('#dialog-title')).toHaveText('Save the Date');
+  await expect(page.locator('.dialog-visit')).toHaveAttribute('href', 'https://save-the-date-md.netlify.app/');
   await page.keyboard.press('Escape');
   await expect(page.locator('#project-dialog')).not.toBeVisible();
   await expect(trigger).toBeFocused();
@@ -51,21 +51,44 @@ test('mobile navigation traps focus, closes with Escape, and navigates to a sect
   await expect(page.locator('#main')).toHaveJSProperty('inert', false);
 });
 
-test('motion lab changes feel, lands precisely, and replays', async ({ page }) => {
+test('composition lab responds to keyboard, exposes layers, rebuilds, and resets', async ({ page }) => {
   await page.goto('/#lab');
-  const orb = page.locator('.lab-orb');
-  for (const mode of ['fluid', 'spring', 'crisp']) {
-    const button = page.locator(`[data-curve="${mode}"]`);
-    await button.click();
-    await expect(button).toHaveAttribute('aria-pressed', 'true');
-    await expect.poll(() => orb.evaluate(element => {
-      const track = element.parentElement;
-      const position = new DOMMatrixReadOnly(getComputedStyle(element).transform).m41;
-      return Math.abs(position - (track.clientWidth - element.clientWidth)) < 1;
-    })).toBe(true);
-  }
-  await page.locator('.lab-replay').click();
-  await expect(page.locator('.lab-description')).toContainText('Crisp');
+  const type = page.locator('[data-lab-grab="type"]');
+  const card = page.locator('[data-lab-grab="card"]');
+  await type.focus();
+  await page.keyboard.press('ArrowRight');
+  await expect.poll(() => page.locator('[data-lab]').evaluate(element => parseFloat(element.style.getPropertyValue('--type-x')))).toBeGreaterThan(10);
+  await card.click();
+  await expect(card).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-lab-colour="cobalt"]').click();
+  await expect(page.locator('[data-lab-colour="cobalt"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-lab-rebuild]').click();
+  await expect(card).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('[data-lab-edition]')).toHaveText('002');
+  await expect(page.locator('[data-lab-state]')).toHaveText('Composed by you');
+  const download = page.waitForEvent('download');
+  await page.locator('[data-lab-save]').click();
+  expect((await download).suggestedFilename()).toBe('aman-composition-002.svg');
+  await page.locator('[data-lab-reset]').click();
+  await expect(page.locator('[data-lab-edition]')).toHaveText('001');
+  await expect(page.locator('[data-lab-colour="vermilion"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('developer story compares the detail, navigates chapters, and opens the full experience', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/#developer-eye');
+  const compare = page.locator('[data-developer-compare]');
+  await compare.click();
+  await expect(compare).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.developer-visual')).toHaveCSS('--detail', '0.0000');
+  await compare.click();
+  await expect(page.locator('.developer-visual')).toHaveCSS('--detail', '1.0000');
+  await page.locator('.developer-scene-nav a[href="#developer-ownership"]').click();
+  await expect(page.locator('[data-developer-caption]')).toContainText('The ownership');
+  await page.locator('.developer-index-link').click();
+  await expect(page.locator('#developer-experience')).toHaveJSProperty('open', true);
+  await expect(page.locator('#developer-experience summary')).toBeFocused();
+  await expect(page.locator('[data-experience="tlx-labs"]')).toBeVisible();
 });
 
 test('reduced motion follows the system and manual preferences persist', async ({ page }) => {
@@ -73,7 +96,9 @@ test('reduced motion follows the system and manual preferences persist', async (
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-motion', 'reduced');
   await expect(page.locator('.motion-toggle')).toBeDisabled();
-  await expect(page.locator('.lab-replay')).toBeDisabled();
+  await expect(page.locator('[data-lab-rebuild]')).toBeEnabled();
+  await page.locator('[data-lab-grab="card"]').click();
+  await expect(page.locator('[data-lab]')).toHaveCSS('--lift', '1.0000');
   await expect(page.locator('#contact-title')).toHaveCSS('opacity', '1');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(page.locator('.motion-toggle')).toBeEnabled();
@@ -115,6 +140,8 @@ test('key content and native links remain readable without JavaScript', async ({
   await expect(page.locator('.desktop-nav a[href="#work"]')).toBeVisible();
   await expect(page.locator('#contact-title')).toHaveCSS('opacity', '1');
   await expect(page.locator('.project')).toHaveCount(4);
+  await page.locator('#developer-experience summary').click();
+  await expect(page.locator('[data-experience="tlx-labs"]')).toBeVisible();
   await context.close();
 });
 

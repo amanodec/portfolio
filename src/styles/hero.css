@@ -1,0 +1,80 @@
+/* A quiet opening: typography, space, and a single invitation. */
+@layer components {
+  .hero-minimal {
+    min-height: max(740px, 100svh);
+    padding-top: 145px;
+    background: var(--paper);
+  }
+  .hero-minimal .hero-meta { align-items: center; gap: 24px; }
+  .hero-minimal .hero-meta .label { font-size: 9px; letter-spacing: .08em; }
+  .hero-meta-divider { width: 28px; height: 1px; background: #a6a399; margin-inline: 6px; }
+  .hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 62px 0 72px; }
+  .hero-minimal .hero-copy { width: 100%; perspective: 1050px; perspective-origin: 54% 58%; }
+  .hero-glyph { display: inline-block; position: relative; transform-origin: 50% 72%; transform-style: preserve-3d; backface-visibility: visible; }
+  @media (hover: hover) and (pointer: fine) { .hero-glyph { will-change: transform; } }
+  .hero-pointer { position: fixed; z-index: 8; left: 0; top: 0; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #ad503b8c; border-radius: 50%; color: #ad503b; background: #f7f6f2d9; font-size: 17px; line-height: 1; opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(.55) rotate(var(--pointer-turn, 0deg)); transition: opacity .3s, scale .5s var(--ease), border-color .3s; backdrop-filter: blur(5px); }
+  .hero-pointer.is-visible, .hero-pointer.is-intro { opacity: 1; scale: 1; }
+  .hero-minimal[data-pointer-active='true'] .hero-pointer { border-color: #ad503b; }
+  .hero-minimal h1 { font-size: clamp(88px, 12vw, 206px); font-weight: 400; line-height: .94; letter-spacing: -.075em; }
+  .hero-minimal h1 .line { padding-block: .08em .12em; margin-block: -.045em; overflow: visible; }
+  .hero-minimal h1 .line > span { transform-style: preserve-3d; }
+  .hero-minimal h1 .line:nth-child(2) { margin-left: 17%; padding-bottom: .23em; margin-bottom: -.125em; }
+  .hero-minimal h1 em { color: #ad503b; letter-spacing: -.075em; }
+  .hero-summary { display: flex; align-items: center; justify-content: space-between; gap: 40px; margin: 40px 0 0 17%; }
+  .hero-summary > p { font-size: clamp(14px, 1.1vw, 18px); line-height: 1.75; color: var(--muted); letter-spacing: -.015em; }
+  .hero-work-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 42px; min-height: 54px; font-size: 12px; position: relative; }
+  .hero-work-link::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px; background: #aaa69c; transition: background .3s; }
+  .hero-link-arrow { display: grid; place-items: center; width: 30px; height: 30px; font-size: 22px; transition: transform .55s var(--ease), color .3s; }
+  .hero-work-link:hover .hero-link-arrow, .hero-work-link:focus-visible .hero-link-arrow { transform: translate(4px, -4px); color: #ad503b; }
+  .hero-work-link:hover::after { background: #ad503b; }
+  .hero-minimal .hero-bottom { position: relative; border-top: 0; align-items: center; padding-block: 23px; }
+  .hero-minimal .hero-bottom::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--line); transform-origin: left; }
+  .hero-minimal .hero-bottom .label { font-size: 8px; letter-spacing: .08em; }
+  .hero-scroll { display: inline-flex; align-items: center; gap: 30px; min-height: 44px; font: 9px var(--mono); color: var(--muted); }
+  .hero-scroll > span { font: 18px var(--sans); transition: transform .5s var(--ease); }
+  .hero-scroll:hover > span { transform: translateY(4px); }
+}
+@layer responsive {
+  @media (min-width: 1800px) { .hero-main { max-width: 1600px; width: 100%; align-self: center; } }
+  @media (max-width: 1100px) {
+    .hero-minimal { min-height: max(680px, 100svh); padding-top: 132px; }
+    .hero-minimal .hero-edition { display: none; }
+    .hero-minimal h1 { font-size: 12vw; }
+    .hero-summary { margin-top: 36px; }
+  }
+  @media (max-width: 760px) {
+    .hero-pointer { display: none; }
+    .hero-minimal { min-height: max(620px, 100svh); padding-top: 118px; }
+    .hero-minimal .hero-meta .label { font-size: 8px; gap: 8px; letter-spacing: .025em; }
+    .hero-meta-divider { width: 18px; margin-inline: 2px; }
+    .hero-main { padding: 58px 0 60px; }
+    .hero-minimal h1 { font-size: clamp(52px, 14.4vw, 108px); line-height: 1; letter-spacing: -.075em; }
+    .hero-minimal h1 .line:nth-child(2) { margin-left: 7%; }
+    .hero-summary { align-items: flex-start; flex-direction: column; gap: 28px; margin: 30px 0 0 7%; }
+    .hero-summary > p { font-size: 13px; }
+    .hero-work-link { gap: 40px; font-size: 11px; min-height: 48px; }
+    .hero-minimal .hero-bottom { gap: 14px; padding-block: 14px; }
+    .hero-minimal .hero-bottom .label { font-size: 7px; letter-spacing: .025em; }
+    .hero-minimal .hero-discipline { display: none; }
+    .hero-scroll { font-size: 8px; gap: 15px; }
+  }
+  @media (max-width: 380px) {
+    .hero-minimal { min-height: max(560px, 100svh); padding-top: 108px; }
+    .hero-main { padding-block: 40px; }
+    .hero-minimal h1 { font-size: 14.1vw; }
+    .hero-summary { margin-top: 25px; gap: 20px; }
+  }
+}
+@layer motion {
+  html[data-motion='full'].motion-ready .hero-minimal .hero-meta { animation: hero-soft-enter .9s var(--ease) both; }
+  html[data-motion='full'].motion-ready .hero-summary { animation: hero-soft-enter 1.1s var(--ease) .3s both; }
+  html[data-motion='full'].motion-ready .hero-minimal .hero-bottom::before { animation: hero-rule-enter 1.4s var(--ease) .35s both; }
+  html[data-motion='full'] .hero-minimal .hero-copy { translate: 0 calc(var(--hero-depart, 0) * -24px); }
+  @keyframes hero-soft-enter { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes hero-rule-enter { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  html[data-motion='reduced'] .hero-minimal *, html[data-motion='reduced'] .hero-minimal *::after { animation: none; transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-minimal *, .hero-minimal *::before, .hero-minimal *::after { animation: none !important; transition: none !important; }
+    html[data-motion] .hero-minimal .hero-copy { translate: none; }
+  }
+}

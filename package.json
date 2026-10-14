@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit",
     "lint": "node scripts/lint.mjs",
-    "test": "npm run typecheck && npm run test:smoke",
+    "test": "npm run typecheck && npm run test:motion && npm run test:smoke",
+    "test:motion": "node --test tests/composition.test.mjs tests/composition-lab.test.mjs tests/developer-story.test.mjs tests/hero-unfold.test.mjs tests/hero-arrival.test.mjs",
     "test:legacy": "node --test tests/*.test.mjs",
     "test:smoke": "playwright test",
     "qa": "npm run typecheck && npm run build && npm run test:smoke"

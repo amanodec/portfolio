@@ -31,35 +31,40 @@ export type ProjectRecord = {
   };
   assets: readonly ProjectAsset[];
   altText: string;
-  visualWorldKey: 'zestt-relay' | 'trading-velocity' | 'decision-clarity' | 'bikers-momentum';
+  visualWorldKey: 'zestt-relay' | 'bollywood-wedding' | 'decision-clarity' | 'bikers-momentum';
   sourceNotes: readonly string[];
 };
 
-// Phase 0 approved Zestt as the benchmark and primary visual subject. Phase 4
-// keeps that order while giving every project the same factual metadata
-// contract. Unverified metrics stay explicitly unpublished.
+// Zestt facts were updated from AmanSharmaResume.pdf on 14 October 2026.
+// Supporting projects retain the previously supplied portfolio facts.
 export const projectRegistry: readonly ProjectRecord[] = [
   {
     slug: 'zestt',
     order: 1,
     title: 'Zestt',
-    role: 'Founder build / product engineering',
-    year: 'Independent build',
-    stack: ['React', 'Next.js', 'TypeScript', 'Node API', 'MySQL'],
-    url: 'https://zestt.in',
-    summary: 'A guided dine-in ordering system that turns a guest’s next choice into a clear restaurant handoff.',
+    role: 'Founder build / full-stack product development',
+    year: 'Apr 2026 — Present',
+    stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
+    url: 'https://www.zestt.in/',
+    summary: 'A full-stack restaurant ordering and management platform with QR-based menus, customer ordering, and role-based staff and admin workflows.',
     outcomes: [
       {
         label: 'Ownership',
         value: 'Conceived, designed, engineered, and deployed end to end.',
         verification: 'verified',
-        source: 'Phase 0 copy deck / existing Zestt case-study copy'
+        source: 'AmanSharmaResume.pdf · Projects · Zestt; existing ownership narrative'
       },
       {
         label: 'Operating story',
-        value: 'Guest choice → order review → restaurant service.',
+        value: 'QR-based menus, customer ordering, and restaurant management workflows.',
         verification: 'verified',
-        source: 'Existing Zestt product narrative'
+        source: 'AmanSharmaResume.pdf · Projects · Zestt'
+      },
+      {
+        label: 'Management and reporting',
+        value: 'Role-based staff and admin interfaces, order management, access permissions, operational dashboards, analytics, and reporting.',
+        verification: 'verified',
+        source: 'AmanSharmaResume.pdf · Projects · Zestt'
       }
     ],
     palette: { base: '#e8e1d3', accent: '#b5532f', signal: '#ff5a1f' },
@@ -73,23 +78,23 @@ export const projectRegistry: readonly ProjectRecord[] = [
     ],
     altText: 'Abstract Zestt relay environment showing a guest choice moving toward restaurant operations.',
     visualWorldKey: 'zestt-relay',
-    sourceNotes: ['Phase 0 approved benchmark decision', 'Existing index.html Zestt narrative', 'assets/zestt/guest-walkthrough.mp4']
+    sourceNotes: ['AmanSharmaResume.pdf · Projects · Zestt', 'Existing ownership narrative', 'assets/zestt/guest-walkthrough.mp4']
   },
   {
-    slug: 'trading-leagues',
+    slug: 'wedding-save-the-date',
     order: 2,
-    title: 'Trading Leagues',
-    role: 'Frontend project work',
-    year: '2024',
-    stack: ['Next.js', 'TypeScript', 'REST'],
-    url: 'https://tradingleagues.app',
-    summary: 'Dynamic leaderboards and routing for a venture-backed fantasy gaming platform.',
-    outcomes: [{ label: 'Outcome status', value: 'No verified metric published yet.', verification: 'aman-confirmation-required', source: 'Existing project index; Aman confirmation required' }],
-    palette: { base: '#151c35', accent: '#4169ff', signal: '#ff5a1f' },
+    title: 'Save the Date',
+    role: 'Personal project / wedding invitation',
+    year: 'Family celebration',
+    stack: ['Digital invitation'],
+    url: 'https://save-the-date-md.netlify.app/',
+    summary: 'A digital save-the-date for my sister’s wedding, styled with Bollywood romance, colour, and cinematic drama.',
+    outcomes: [{ label: 'For', value: 'My sister’s wedding celebration.', verification: 'verified', source: 'Project owner description' }],
+    palette: { base: '#4b1026', accent: '#d99a36', signal: '#f0c55b' },
     assets: [],
-    altText: 'Decorative Trading Leagues scoreboard world showing velocity settling into proof.',
-    visualWorldKey: 'trading-velocity',
-    sourceNotes: ['Existing project index', 'Phase 4 world uses decorative domain art; authentic media not supplied']
+    altText: 'A Bollywood-inspired wedding invitation composition in deep maroon and gold.',
+    visualWorldKey: 'bollywood-wedding',
+    sourceNotes: ['Project link and description supplied by Aman']
   },
   {
     slug: 'decisionarc',

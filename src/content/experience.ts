@@ -1,4 +1,4 @@
-export type ExperienceVerification = 'conservative-source-wording';
+export type ExperienceVerification = 'conservative-source-wording' | 'resume-supplied';
 
 export type ExperienceOutcome = {
   label: string;
@@ -28,27 +28,39 @@ const metricPattern = /(?:\d+\s*%|\b\d+\s*\+|\b\d+\s*x\b)/i;
 
 export const experienceRegistry: readonly ExperienceRecord[] = [
   {
-    id: 'rain-platforms',
+    id: 'tlx-labs',
     order: 1,
-    company: 'Rain Platforms',
-    location: 'Kolkata',
+    company: 'TLX Labs',
+    location: 'Remote',
     title: 'Full-Stack Developer',
     dateLabel: 'Nov 2023 — Present',
     start: '2023-11',
     end: null,
-    responsibility: 'Production frontend and payment-flow work for a P2P cryptocurrency platform.',
+    responsibility: 'Led frontend development of Tylt from 0 to 1 within a four-engineer team, mentoring three Flutter developers in React development.',
     outcomes: [
       {
         label: 'Role proof',
-        value: 'Production dashboards, application state, and transaction-flow surfaces.',
-        sourceRef: 'Phase 0 claim register / Rain Platforms',
-        verification: 'conservative-source-wording'
+        value: 'React application architecture, Redux-based state management, routing, KYC/KYB workflows, and administrative dashboards.',
+        sourceRef: 'AmanSharmaResume.pdf · Work Experience · TLX Labs',
+        verification: 'resume-supplied'
+      },
+      {
+        label: 'Merchant integration',
+        value: 'Primary technical point of contact for 15+ merchant integrations, covering API integration, technical onboarding, coordination, and troubleshooting.',
+        sourceRef: 'AmanSharmaResume.pdf · Work Experience · TLX Labs',
+        verification: 'resume-supplied'
+      },
+      {
+        label: 'Exchange workflows',
+        value: 'Merchant-facing integrations and deposit/withdrawal workflows for a cryptocurrency exchange platform.',
+        sourceRef: 'AmanSharmaResume.pdf · Work Experience · TLX Labs',
+        verification: 'resume-supplied'
       }
     ],
-    technologies: ['Production dashboards', 'Application state', 'Payment/API flows'],
+    technologies: ['React', 'Redux', 'REST APIs', 'KYC/KYB', 'Payment and merchant onboarding'],
     accent: '#ff5a1f',
-    sourceRef: 'docs/phase-0/content-and-claims.md · Rain Platforms',
-    verification: 'conservative-source-wording'
+    sourceRef: 'AmanSharmaResume.pdf · Work Experience · TLX Labs',
+    verification: 'resume-supplied'
   },
   {
     id: 'superchat',
@@ -59,19 +71,19 @@ export const experienceRegistry: readonly ExperienceRecord[] = [
     dateLabel: 'Apr 2023 — Sep 2023',
     start: '2023-04',
     end: '2023-09',
-    responsibility: 'Cross-browser extension and onboarding work.',
+    responsibility: 'Led development of an AI-powered browser extension with cross-browser compatibility.',
     outcomes: [
       {
         label: 'Role proof',
-        value: 'AI assistant extension, authentication journeys, and Firebase routines.',
-        sourceRef: 'Phase 0 claim register / Superchat',
-        verification: 'conservative-source-wording'
+        value: 'ChatGPT authentication and functionality, user onboarding, and Firebase Cloud Functions for backend operations.',
+        sourceRef: 'AmanSharmaResume.pdf · Work Experience · Superchat',
+        verification: 'resume-supplied'
       }
     ],
-    technologies: ['Cross-browser extension', 'Authentication', 'Firebase'],
+    technologies: ['Cross-browser extension', 'ChatGPT integration', 'Authentication', 'Firebase Cloud Functions'],
     accent: '#8d5cff',
-    sourceRef: 'docs/phase-0/content-and-claims.md · Superchat',
-    verification: 'conservative-source-wording'
+    sourceRef: 'AmanSharmaResume.pdf · Work Experience · Superchat',
+    verification: 'resume-supplied'
   },
   {
     id: 'fleapo',
@@ -82,19 +94,19 @@ export const experienceRegistry: readonly ExperienceRecord[] = [
     dateLabel: 'Jan 2022 — Jun 2022',
     start: '2022-01',
     end: '2022-06',
-    responsibility: 'Responsive React interface work.',
+    responsibility: 'Developed responsive web interfaces using React, JavaScript, and CSS.',
     outcomes: [
       {
         label: 'Role proof',
-        value: 'Responsive interfaces built with React and vanilla CSS systems.',
-        sourceRef: 'Phase 0 claim register / Fleapo',
-        verification: 'conservative-source-wording'
+        value: 'Resolved browser compatibility and frontend performance issues, optimizing rendering and improving the user experience.',
+        sourceRef: 'AmanSharmaResume.pdf · Work Experience · Fleapo',
+        verification: 'resume-supplied'
       }
     ],
-    technologies: ['React', 'Vanilla CSS', 'Responsive rendering'],
+    technologies: ['React', 'JavaScript', 'CSS', 'Responsive rendering'],
     accent: '#4169ff',
-    sourceRef: 'docs/phase-0/content-and-claims.md · Fleapo',
-    verification: 'conservative-source-wording'
+    sourceRef: 'AmanSharmaResume.pdf · Work Experience · Fleapo',
+    verification: 'resume-supplied'
   }
 ] as const;
 
@@ -110,7 +122,7 @@ export function validateExperienceRegistry(records: readonly ExperienceRecord[] 
     ids.add(record.id);
     if (record.order !== index + 1) errors.push(`Experience order must be chronological at ${record.id}.`);
     if (!record.company || !record.title || !record.dateLabel || !record.start) errors.push(`Incomplete experience record: ${record.id}`);
-    if (!record.sourceRef || record.verification !== 'conservative-source-wording') errors.push(`Missing source status: ${record.id}`);
+    if (!record.sourceRef || !['conservative-source-wording', 'resume-supplied'].includes(record.verification)) errors.push(`Missing source status: ${record.id}`);
     if (!record.outcomes.length) errors.push(`Missing role evidence: ${record.id}`);
     if (!record.technologies.length) errors.push(`Missing technology/context labels: ${record.id}`);
 
@@ -123,10 +135,10 @@ export function validateExperienceRegistry(records: readonly ExperienceRecord[] 
       ...record.outcomes.map(({ value }) => value),
       ...record.technologies
     ].join(' ');
-    if (metricPattern.test(publicText)) errors.push(`Unverified metric in public experience copy: ${record.id}`);
+    if (metricPattern.test(publicText) && record.verification !== 'resume-supplied') errors.push(`Unverified metric in public experience copy: ${record.id}`);
     record.outcomes.forEach((outcome) => {
-      if (!outcome.sourceRef || outcome.verification !== 'conservative-source-wording') errors.push(`Missing evidence source: ${record.id}/${outcome.label}`);
-      if (metricPattern.test(`${outcome.label} ${outcome.value}`)) errors.push(`Unverified metric in evidence: ${record.id}/${outcome.label}`);
+      if (!outcome.sourceRef || !['conservative-source-wording', 'resume-supplied'].includes(outcome.verification)) errors.push(`Missing evidence source: ${record.id}/${outcome.label}`);
+      if (metricPattern.test(`${outcome.label} ${outcome.value}`) && outcome.verification !== 'resume-supplied') errors.push(`Unverified metric in evidence: ${record.id}/${outcome.label}`);
     });
   });
 

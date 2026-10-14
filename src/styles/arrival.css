@@ -1,0 +1,43 @@
+/* The real headline and product poster become one tactile printed scene. */
+@layer components {
+  .hero-arrival { display: none; position: fixed; inset: 0; z-index: 55; overflow: clip; perspective: 1350px; perspective-origin: 50% 44%; pointer-events: none; isolation: isolate; }
+  html[data-arrival='pending'] .hero-arrival, html[data-arrival='playing'] .hero-arrival { display: block; }
+  .arrival-ground { position: absolute; inset: 0; background: var(--paper); }
+  .arrival-paper { position: absolute; inset: -2%; transform-style: preserve-3d; transform-origin: 48% 46%; background-color: #eeeadf; background-image: linear-gradient(90deg, transparent 0 8.25%, #aaa18b15 8.25% 8.33%, transparent 8.33% 16.58%, #aaa18b11 16.58% 16.66%, transparent 16.66%), linear-gradient(#b7ad9812 1px, transparent 1px); background-size: 100% 100%, 100% 42px; border: 1px solid #ccc2ae; box-shadow: 0 32px 90px #322c1f2e, inset 0 0 0 12px #ffffff38; transform-style: preserve-3d; backface-visibility: hidden; will-change: transform; }
+  .arrival-paper::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); transform: translate3d(0, 15px, -24px); box-shadow: 0 18px 35px #362d1e21; }
+  .arrival-paper::after { content: ''; position: absolute; inset: 2%; border: 1px solid #c5bba7a8; pointer-events: none; }
+  .arrival-paper-index { position: absolute; inset: 5.2% 6.1% auto; display: flex; justify-content: space-between; gap: 20px; color: #716a5c; font: 9px var(--mono); letter-spacing: .14em; }
+  .arrival-paper-register { position: absolute; top: 4%; right: 7%; font: clamp(40px, 7vw, 100px)/1 var(--sans); color: var(--accent); transform: rotate(-14deg); }
+  .arrival-paper-colophon { position: absolute; left: 6.1%; bottom: 5.4%; color: #716a5c; font: 8px var(--mono); letter-spacing: .11em; }
+  .arrival-proof { position: absolute; right: 13%; bottom: 9%; width: clamp(170px, 25vw, 440px); display: flex; flex-direction: column; gap: 10px; transform: rotate(3deg) translateZ(4px); }
+  .arrival-proof > img { width: 100%; height: auto; border: 8px solid #faf8ef; box-shadow: 0 14px 32px #37302125; }
+  .arrival-proof > span { align-self: flex-end; color: #665e51; font: 8px var(--mono); letter-spacing: .1em; }
+  .arrival-type { position: absolute; z-index: 3; top: 210px; left: var(--gutter); width: calc(100% - var(--gutter) * 2); font: 500 clamp(96px, 14.7vw, 280px)/.91 var(--sans); letter-spacing: -.085em; transform-origin: 48% 43%; transform-style: preserve-3d; color: var(--ink); text-shadow: 1px 2px 0 #b9ae99, 2px 4px 0 #b5a890, 3px 6px 0 #ae9f87, 4px 8px 0 #a89880, 5px 10px 0 #a29279, 7px 14px 0 #96866e, 12px 24px 16px #493b2940; will-change: transform; }
+  .arrival-type .line { display: block; padding-block: .04em .12em; transform-style: preserve-3d; }
+  .arrival-type .line > span { display: block; transform-style: preserve-3d; }
+  .arrival-type .line:nth-child(2) { margin-left: 12%; }
+  .arrival-type em { color: var(--accent); letter-spacing: -.085em; }
+  .arrival-thread { position: absolute; z-index: 4; left: var(--gutter); top: 174px; width: calc(100% - var(--gutter) * 2); height: 605px; overflow: visible; }
+  .arrival-thread path { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 3px 3px #8a331d26); }
+}
+@layer responsive {
+  @media (max-width: 1100px) and (min-width: 761px) { .arrival-type { font-size: 14.3vw; } }
+  @media (max-width: 760px) {
+    .arrival-type { top: 173px; font-size: 17vw; line-height: .98; }
+    .arrival-type .line:nth-child(2) { margin-left: 2%; }
+    .arrival-thread { top: 149px; height: 690px; }
+    .arrival-paper-index { font-size: 7px; }
+    .arrival-paper-register { top: 10%; right: 7%; }
+    .arrival-proof { right: 8%; bottom: 13%; width: clamp(100px, 31vw, 170px); }
+    .arrival-proof > img { border-width: 5px; }
+    .arrival-proof > span { font-size: 6px; }
+    .arrival-paper-colophon { font-size: 7px; max-width: 160px; line-height: 1.6; }
+  }
+}
+@layer motion {
+  html:is([data-arrival='pending'], [data-arrival='playing']) .hero-copy { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    html[data-arrival] .hero-arrival { display: none; }
+    html[data-arrival] .hero-copy { opacity: 1; }
+  }
+}

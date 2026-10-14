@@ -1,4 +1,9 @@
 import { projectRegistry } from './content/projects';
+import { profileContent } from './content/profile';
+import { CompositionMotion } from './motion/CompositionMotion';
+import { CompositionLab } from './motion/CompositionLab';
+import { DeveloperStory } from './motion/DeveloperStory';
+import { HeroInteraction } from './motion/HeroInteraction';
 
 const root = document.documentElement;
 const query = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
@@ -24,6 +29,10 @@ const sectionLinks = all<HTMLAnchorElement>('.desktop-nav a');
 const sections = all<HTMLElement>('main > section[id]');
 const projectArt = all<HTMLElement>('.project-art');
 const walkthroughUrl = new URL('../assets/zestt/guest-walkthrough.mp4', import.meta.url).href;
+const composition = new CompositionMotion(requestFrame, signal);
+const lab = new CompositionLab(requestFrame, signal);
+const developer = new DeveloperStory(requestFrame, signal);
+const heroInteraction = new HeroInteraction(signal, !reduced);
 
 function requestFrame() {
   if (!frameId && !document.hidden) frameId = requestAnimationFrame(updateFrame);
@@ -62,6 +71,9 @@ function updateFrame(time: number) {
       state.element.style.setProperty('--tilt-y', state.y.toFixed(4));
     } else state.element.style.translate = `${state.x.toFixed(2)}px ${state.y.toFixed(2)}px`;
   }
+  if (composition.update(delta)) unsettled = true;
+  if (lab.update(delta / 60)) unsettled = true;
+  if (developer.update(delta)) unsettled = true;
   if (unsettled) requestFrame();
 }
 for (const state of tilts) {
@@ -98,19 +110,7 @@ const revealObserver = new IntersectionObserver(entries => {
     if (entry.isIntersecting) entry.target.classList.add('is-visible');
   }
 }, { rootMargin: '0px 0px -5% 0px', threshold: .08 });
-all<HTMLElement>('[data-reveal], .sculpture-wrap').forEach(element => revealObserver.observe(element));
-
-const sculpture = query<HTMLElement>('.sculpture-wrap');
-const artTurn = query<HTMLButtonElement>('[data-art-turn]');
-let angle = 0;
-function turnSculpture() {
-  angle = angle === 0 ? 1 : 0;
-  sculpture.dataset.artAngle = String(angle);
-  artTurn.setAttribute('aria-pressed', String(angle === 1));
-}
-artTurn.setAttribute('aria-pressed', 'false');
-artTurn.addEventListener('click', turnSculpture, { signal });
-query<HTMLElement>('.sculpture').addEventListener('click', turnSculpture, { signal });
+all<HTMLElement>('[data-reveal], .sculpture-wrap, .discipline-strip, .role').forEach(element => revealObserver.observe(element));
 
 // A native, keyboard-safe menu; background content is inert while it is open.
 const menu = query<HTMLElement>('#menu');
@@ -156,8 +156,8 @@ const projectDialog = query<HTMLDialogElement>('#project-dialog');
 const videoDialog = query<HTMLDialogElement>('#video-dialog');
 const video = query<HTMLVideoElement>('#video-dialog video');
 const details: Record<string, string> = {
-  zestt: 'An independent product build, from the first idea through the interface and deployment. The guest experience connects menu browsing, item detail, and cart review into a readable path. React and Next.js shape the frontend, backed by a Node API and MySQL. The walkthrough on this page shows the actual guest interface.',
-  'trading-leagues': 'Frontend work focused on leaderboard surfaces and application routing. The challenge was to give a changing, information-rich experience a clear hierarchy and predictable navigation. Built with Next.js, TypeScript, and REST integrations.',
+  zestt: 'Designed and developed a full-stack restaurant SaaS platform with QR-based menus, customer ordering, and restaurant management workflows. Built role-based staff and admin interfaces for order management, access permissions, and operational dashboards. Implemented restaurant analytics and reporting with Supabase for order data, customer activity, and menu performance insights. The frontend uses React, Next.js, TypeScript, and Tailwind CSS. The walkthrough on this page shows the actual guest interface.',
+  'wedding-save-the-date': 'A personal digital save-the-date for my sister’s wedding. Its visual direction leans into Bollywood film posters: saturated maroon, warm gold, ornate framing, and a little cinematic romance.',
   decisionarc: 'A professional-services website with a clear content hierarchy and an experience designed to work across screen sizes. The frontend work used React, with attention to responsive composition and fast mobile rendering.',
   'vinayak-bikers': 'A local discovery website built with HTML and CSS. Structured content, technical SEO, and a purposeful browsing experience help connect the business with the people looking for it.'
 };
@@ -167,6 +167,15 @@ function openDialog(dialog: HTMLDialogElement, trigger: HTMLElement) {
   dialogTriggers.set(dialog, trigger);
   dialog.showModal();
   dialog.scrollTop = 0;
+  const source = trigger.getBoundingClientRect();
+  // Layout coordinates stay stable while the opening transform is already running.
+  const destination = { left: dialog.offsetLeft, top: dialog.offsetTop, width: dialog.offsetWidth, height: dialog.offsetHeight };
+  const sourceX = source.left + source.width / 2;
+  const sourceY = source.top + source.height / 2;
+  dialog.style.setProperty('--origin-x', `${sourceX - destination.left}px`);
+  dialog.style.setProperty('--origin-y', `${sourceY - destination.top}px`);
+  dialog.style.setProperty('--from-x', `${(sourceX - destination.left - destination.width / 2) * .12}px`);
+  dialog.style.setProperty('--from-y', `${(sourceY - destination.top - destination.height / 2) * .12}px`);
   syncOverlayLock();
 }
 async function closeDialog(dialog: HTMLDialogElement) {
@@ -189,8 +198,11 @@ all<HTMLButtonElement>('[data-project]').forEach(button => button.addEventListen
   query<HTMLElement>('.dialog-summary').textContent = project.summary;
   query<HTMLElement>('[data-dialog-role]').textContent = project.role;
   query<HTMLElement>('[data-dialog-stack]').textContent = project.stack.join(' / ');
+  query<HTMLElement>('[data-dialog-format]').textContent = project.slug === 'wedding-save-the-date' ? 'Format' : 'Built with';
   query<HTMLElement>('.dialog-detail').textContent = details[project.slug];
-  query<HTMLAnchorElement>('.dialog-visit').href = project.url;
+  const visitLink = query<HTMLAnchorElement>('.dialog-visit');
+  visitLink.href = project.url;
+  visitLink.firstChild!.textContent = project.slug === 'wedding-save-the-date' ? 'View invitation ' : 'Visit live project ';
   openDialog(projectDialog, button);
 }, { signal }));
 query<HTMLButtonElement>('[data-close-dialog]').addEventListener('click', () => { void closeDialog(projectDialog); }, { signal });
@@ -211,73 +223,22 @@ query<HTMLButtonElement>('[data-open-video]').addEventListener('click', event =>
 video.addEventListener('error', () => { query<HTMLElement>('.video-error').hidden = false; }, { signal });
 query<HTMLAnchorElement>('.video-error a').href = walkthroughUrl;
 
-type Curve = 'crisp' | 'fluid' | 'spring';
-const curveDescriptions: Record<Curve, { description: string; code: string; duration: number; easing: string }> = {
-  crisp: { description: 'Crisp — quick, decisive feedback for an everyday action.', code: '300ms · cubic-bezier(.2, .8, .2, 1)', duration: 300, easing: 'cubic-bezier(.2, .8, .2, 1)' },
-  fluid: { description: 'Fluid — a considered transition that lets the eye follow the change.', code: '900ms · cubic-bezier(.22, 1, .36, 1)', duration: 900, easing: 'cubic-bezier(.22, 1, .36, 1)' },
-  spring: { description: 'Spring — a little energy, a soft overshoot, then a precise landing.', code: '1200ms · damped spring', duration: 1200, easing: 'linear' }
-};
-let curve: Curve = 'crisp';
-let labAnimation: Animation | undefined;
-const orb = query<HTMLElement>('.lab-orb');
-const track = query<HTMLElement>('.lab-track');
-const labDescription = query<HTMLElement>('.lab-description');
-const labCode = query<HTMLElement>('.lab-code');
-const replayButton = query<HTMLButtonElement>('.lab-replay');
-function labDistance() { return Math.max(0, track.clientWidth - orb.clientWidth); }
-function renderLabDescription() {
-  labDescription.textContent = `${curveDescriptions[curve].description}${reduced ? ' Motion paused; destination shown.' : ''}`;
-  labCode.textContent = curveDescriptions[curve].code;
-}
-function playLab() {
-  labAnimation?.cancel();
-  const distance = labDistance();
-  if (reduced) { orb.style.transform = `translate(${distance}px, -50%)`; return; }
-  orb.style.transform = 'translate(0, -50%)';
-  const settings = curveDescriptions[curve];
-  const keyframes = curve === 'spring'
-    ? Array.from({ length: 61 }, (_, index) => {
-      const t = index / 60;
-      const progress = index === 60 ? 1 : 1 - Math.exp(-7.5 * t) * Math.cos(11.5 * t);
-      return { transform: `translate(${progress * distance}px, -50%)`, offset: t };
-    })
-    : [{ transform: 'translate(0, -50%)' }, { transform: `translate(${distance}px, -50%)` }];
-  labAnimation = orb.animate(keyframes, { duration: settings.duration, easing: settings.easing, fill: 'forwards' });
-}
-all<HTMLButtonElement>('[data-curve]').forEach(button => button.addEventListener('click', () => {
-  curve = button.dataset.curve as Curve;
-  all<HTMLButtonElement>('[data-curve]').forEach(item => {
-    const selected = item === button;
-    item.classList.toggle('is-selected', selected);
-    item.setAttribute('aria-pressed', String(selected));
-  });
-  renderLabDescription();
-  playLab();
-}, { signal }));
-replayButton.addEventListener('click', playLab, { signal });
-const labResize = new ResizeObserver(() => {
-  if (!labAnimation && !reduced) return;
-  labAnimation?.cancel();
-  orb.style.transform = `translate(${labDistance()}px, -50%)`;
-});
-labResize.observe(track);
-
 function applyMotion() {
   reduced = paused || systemMotion.matches;
   root.dataset.motion = reduced ? 'reduced' : 'full';
+  composition.setReduced(reduced);
+  lab.setReduced(reduced);
+  developer.setReduced(reduced);
+  heroInteraction.setEnabled(!reduced);
   motionButton.setAttribute('aria-pressed', String(reduced));
   motionButton.disabled = systemMotion.matches;
   motionButton.setAttribute('aria-label', systemMotion.matches ? 'Reduced motion follows your system setting' : reduced ? 'Enable decorative motion' : 'Pause decorative motion');
   query<HTMLElement>('.motion-label').textContent = systemMotion.matches ? 'Reduced motion' : reduced ? 'Motion off' : 'Motion on';
   query<HTMLElement>('.motion-icon').textContent = reduced ? '▷' : 'Ⅱ';
-  replayButton.disabled = reduced;
   if (reduced) {
     for (const state of [...tilts, ...magnetic]) state.x = state.y = state.tx = state.ty = 0;
     requestFrame();
-    labAnimation?.cancel();
-    orb.style.transform = `translate(${labDistance()}px, -50%)`;
   }
-  renderLabDescription();
 }
 motionButton.addEventListener('click', () => {
   paused = !paused;
@@ -289,7 +250,7 @@ applyMotion();
 root.classList.add('motion-ready');
 requestFrame();
 
-const email = 'amansharmaofficial27@gmail.com';
+const email = profileContent.email;
 const copyStatus = query<HTMLElement>('.copy-status');
 let copyTimer = 0;
 query<HTMLButtonElement>('.copy-email').addEventListener('click', async () => {
@@ -309,7 +270,6 @@ query<HTMLButtonElement>('.copy-email').addEventListener('click', async () => {
 }, { signal });
 function updateClock() {
   const now = new Date();
-  query<HTMLElement>('[data-local-time]').textContent = `${new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false }).format(now)} IST`;
   query<HTMLElement>('[data-year]').textContent = new Intl.DateTimeFormat('en', { timeZone: 'Asia/Kolkata', year: 'numeric' }).format(now);
 }
 updateClock();
@@ -320,8 +280,6 @@ window.addEventListener('pagehide', event => {
   controller.abort();
   cancelAnimationFrame(frameId);
   revealObserver.disconnect();
-  labResize.disconnect();
-  labAnimation?.cancel();
   window.clearInterval(clockTimer);
   window.clearTimeout(copyTimer);
   video.pause();
