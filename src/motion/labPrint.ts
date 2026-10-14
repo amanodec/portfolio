@@ -15,7 +15,7 @@ export function createCompositionPrint(layout: PrintLayout) {
   const font = Math.min(300, Math.max(42, n(layout.titleFont * 1400, 100)));
   const edition = String(Math.max(1, Math.floor(n(layout.edition, 1)))).padStart(3, '0');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="${height}" viewBox="0 0 1400 ${height}" role="img" aria-labelledby="print-title print-desc">
-<title id="print-title">Room for possibility — composition ${edition}</title><desc id="print-desc">An interactive print composed by you in Aman Sharma’s interaction lab.</desc>
+<title id="print-title">Room for possibility, composition ${edition}</title><desc id="print-desc">An interactive print composed by you in Aman Sharma’s interaction lab.</desc>
 <rect width="1400" height="${height}" fill="#efede6"/>
 <path d="M45 65H1355M45 ${height - 65}H1355" stroke="#cdc7b9"/>
 <g font-family="monospace" font-size="10" fill="#6b6558" letter-spacing="1"><text x="48" y="44">AN OPEN COMPOSITION / ${edition}</text><text x="1352" y="44" text-anchor="end">YOUR INSTINCT. MY CODE.</text></g>

@@ -14,7 +14,7 @@ export function collectContactValues(form: HTMLFormElement): ContactValues {
 }
 
 export function buildMailto(values: ContactValues, recipient = contactContent.email) {
-  const subject = `Project inquiry — ${values.project || 'new project'}`;
+  const subject = `Project inquiry: ${values.project || 'new project'}`;
   const message = [
     'Hi Aman,', '',
     `I'm ${values.name || 'getting in touch'} (${values.email || 'email not provided'}).`, '',
@@ -131,7 +131,7 @@ export class ContactForm {
     const mailto = buildMailto(collectContactValues(this.form));
     this.root.dataset.contactState = 'launching';
     this.monogram?.classList.add('is-resolved');
-    this.setStatus('Prepared locally — opening your email app. Delivery is not confirmed.');
+    this.setStatus('Prepared locally. Opening your email app. Delivery is not confirmed.');
     window.location.href = mailto;
   }
 
@@ -151,7 +151,7 @@ export class ContactForm {
       }
       if (!this.destroyed) this.copyStatus && (this.copyStatus.textContent = 'Email copied.');
     } catch {
-      if (!this.destroyed) this.copyStatus && (this.copyStatus.textContent = 'Copy unavailable — select the address instead.');
+      if (!this.destroyed) this.copyStatus && (this.copyStatus.textContent = 'Copy unavailable. Select the address instead.');
     } finally {
       helper?.remove();
     }

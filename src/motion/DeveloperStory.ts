@@ -98,9 +98,9 @@ export class DeveloperStory {
         else link.removeAttribute('aria-current');
       });
       this.caption.textContent = [
-        '01 / The eye — every detail earns its place.',
-        '02 / The thinking — one action, connected decisions.',
-        '03 / The ownership — bringing people and product together.'
+        '01 / The eye: every detail earns its place.',
+        '02 / The thinking: one action, connected decisions.',
+        '03 / The ownership: bringing people and product together.'
       ][score.chapter];
     }
     this.settled = !active;

@@ -108,7 +108,7 @@
     if (frame.querySelector('.media-error')) return;
     const message = doc.createElement('span');
     message.className = 'media-error';
-    message.textContent = 'Media unavailable — use the linked product source or approved capture.';
+    message.textContent = 'Media unavailable. Use the linked product source or approved capture.';
     frame.append(message);
   }
 

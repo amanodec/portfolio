@@ -22,13 +22,13 @@ export const profileContent = {
   education: {
     degree: 'Bachelor of Technology',
     institution: 'RCC Institute of Information Technology',
-    dateLabel: 'Aug 2019 — Aug 2023',
+    dateLabel: 'Aug 2019 to Aug 2023',
     location: 'Kolkata, India',
     cgpa: '8.93'
   },
   achievements: [
     'ACM–ICPC Regionalist, 2020',
-    'Google Kick Start — Rank 1,096, Round E',
+    'Google Kick Start: Rank 1,096, Round E',
     'Solved 1,000+ algorithmic problems across competitive programming platforms'
   ],
   source: 'AmanSharmaResume.pdf'

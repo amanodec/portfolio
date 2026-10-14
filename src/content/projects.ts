@@ -43,7 +43,7 @@ export const projectRegistry: readonly ProjectRecord[] = [
     order: 1,
     title: 'Zestt',
     role: 'Founder build / full-stack product development',
-    year: 'Apr 2026 — Present',
+    year: 'Apr 2026 to Present',
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
     url: 'https://www.zestt.in/',
     summary: 'A full-stack restaurant ordering and management platform with QR-based menus, customer ordering, and role-based staff and admin workflows.',
