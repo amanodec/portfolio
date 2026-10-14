@@ -46,7 +46,7 @@ export const projectRegistry: readonly ProjectRecord[] = [
     year: 'Apr 2026 to Present',
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
     url: 'https://www.zestt.in/',
-    summary: 'A full-stack restaurant ordering and management platform with QR-based menus, customer ordering, and role-based staff and admin workflows.',
+    summary: 'A full-stack restaurant ordering and management platform with QR-based menus, customer ordering, staff and admin workflows, and AI search.',
     outcomes: [
       {
         label: 'Ownership',
@@ -65,6 +65,12 @@ export const projectRegistry: readonly ProjectRecord[] = [
         value: 'Role-based staff and admin interfaces, order management, access permissions, operational dashboards, analytics, and reporting.',
         verification: 'verified',
         source: 'AmanSharmaResume.pdf · Projects · Zestt'
+      },
+      {
+        label: 'AI search',
+        value: 'AI search is integrated into the Zestt product.',
+        verification: 'verified',
+        source: 'Aman confirmation · 14 October 2026'
       }
     ],
     palette: { base: '#e8e1d3', accent: '#b5532f', signal: '#ff5a1f' },
@@ -78,7 +84,7 @@ export const projectRegistry: readonly ProjectRecord[] = [
     ],
     altText: 'Abstract Zestt relay environment showing a guest choice moving toward restaurant operations.',
     visualWorldKey: 'zestt-relay',
-    sourceNotes: ['AmanSharmaResume.pdf · Projects · Zestt', 'Existing ownership narrative', 'assets/zestt/guest-walkthrough.mp4']
+    sourceNotes: ['AmanSharmaResume.pdf · Projects · Zestt', 'Aman confirmation · AI search and AI-assisted build workflows', 'Existing ownership narrative', 'assets/zestt/guest-walkthrough.mp4']
   },
   {
     slug: 'wedding-save-the-date',
