@@ -48,9 +48,13 @@
     .hero-minimal .hero-meta .label { font-size: 8px; gap: 8px; letter-spacing: .025em; }
     .hero-meta-divider { width: 18px; margin-inline: 2px; }
     .hero-main { padding: 58px 0 60px; }
-    .hero-minimal h1 { font-size: clamp(52px, 14.4vw, 108px); line-height: 1; letter-spacing: -.075em; }
-    .hero-minimal h1 .line:nth-child(2) { margin-left: 7%; }
-    .hero-summary { align-items: flex-start; flex-direction: column; gap: 28px; margin: 30px 0 0 7%; }
+    .hero-minimal .hero-copy { perspective: none; }
+    .hero-minimal h1 { font-size: clamp(52px, 14.4vw, 108px); line-height: 1.08; letter-spacing: -.075em; }
+    .hero-minimal h1 .line { display: block; padding-block: .12em .18em; margin-block: -.02em; overflow: visible; }
+    .hero-minimal h1 .line > span { transform: none; transform-style: flat; }
+    .hero-minimal .hero-glyph { transform-style: flat; }
+    .hero-minimal h1 .line:nth-child(2) { margin-left: 0; padding-bottom: .18em; margin-bottom: -.02em; }
+    .hero-summary { align-items: flex-start; flex-direction: column; gap: 28px; margin: 30px 0 0; }
     .hero-summary > p { font-size: 13px; }
     .hero-work-link { gap: 40px; font-size: 11px; min-height: 48px; }
     .hero-minimal .hero-bottom { gap: 14px; padding-block: 14px; }

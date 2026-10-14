@@ -60,6 +60,9 @@ export class HeroInteraction {
     this.hero.addEventListener('pointermove', this.onMove, { passive: true, signal });
     this.hero.addEventListener('pointerleave', this.onLeave, { passive: true, signal });
     window.addEventListener('resize', this.onResize, { passive: true, signal });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) this.finishIntro();
+    }, { signal });
     signal.addEventListener('abort', () => this.destroy(), { once: true });
     requestAnimationFrame(() => this.playIntro());
     this.readyTimer = window.setTimeout(() => {
@@ -92,6 +95,7 @@ export class HeroInteraction {
     this.hero.dataset.heroIntro = 'playing';
     const lines = Array.from(this.heading.querySelectorAll<HTMLElement>('.line'));
     const firstLine = lines[0];
+    const touchLayout = !this.finePointer.matches;
     const fullStop = this.glyphs.find(glyph => glyph.element.textContent === '.');
     const fullStopRect = fullStop?.element.getBoundingClientRect();
 
@@ -100,26 +104,34 @@ export class HeroInteraction {
       const inSecondLine = line !== firstLine;
       const italic = !!glyph.element.closest('em');
       const lineIndex = this.glyphs.slice(0, index).filter(item => item.element.closest('.line') === line).length;
-      const delay = !inSecondLine ? 80 + lineIndex * 38 : italic ? 1050 + lineIndex * 34 : 650 + lineIndex * 75;
-      const duration = !inSecondLine ? 1180 : italic ? 1260 : 1040;
+      const delay = touchLayout
+        ? (inSecondLine ? 110 : 0) + lineIndex * 26
+        : !inSecondLine ? 80 + lineIndex * 38 : italic ? 1050 + lineIndex * 34 : 650 + lineIndex * 75;
+      const duration = touchLayout ? 620 : !inSecondLine ? 1180 : italic ? 1260 : 1040;
       const side = Math.sin(index * 12.9898) < 0 ? -1 : 1;
       const startX = Math.round(Math.sin(index * 12.9898) * 330);
       const startY = Math.round(Math.cos(index * 7.231) * 300);
       const spinX = side * (360 + index % 3 * 180);
       const spinY = -side * (360 + index % 4 * 120);
       const spinZ = Math.round(Math.sin(index * 3.73) * 240);
-      const animation = glyph.element.animate([
-        { opacity: 0, transform: `translate3d(${startX}px, ${startY}px, -420px) rotateX(${spinX}deg) rotateY(${spinY}deg) rotateZ(${spinZ}deg) scale(.12)`, offset: 0 },
-        { opacity: .82, transform: `translate3d(${startX * .58}px, ${startY * .58}px, -130px) rotateX(${spinX * .58}deg) rotateY(${spinY * .58}deg) rotateZ(${spinZ * .58}deg) scale(.58)`, offset: .36 },
-        { opacity: 1, transform: `translate3d(0, 13px, 0) rotateX(-12deg) rotateY(0deg) rotateZ(${side * 8}deg) scale(1.26, .72)`, offset: .73 },
-        { opacity: 1, transform: `translate3d(0, -12px, 0) rotateX(8deg) rotateY(0deg) rotateZ(${side * -3}deg) scale(.88, 1.14)`, offset: .86 },
-        { opacity: 1, transform: `translate3d(0, 4px, 0) rotateX(-3deg) rotateY(0deg) scale(1.035, .97)`, offset: .94 },
-        { opacity: 1, transform: 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)', offset: 1 }
-      ], { duration, delay, easing: 'cubic-bezier(.2, 1.15, .34, 1)', fill: 'both' });
+      const keyframes: Keyframe[] = touchLayout
+        ? [
+            { opacity: 0, transform: `translateY(18px) rotate(${side * 5}deg) scale(.94)`, offset: 0 },
+            { opacity: 1, transform: 'translateY(0) rotate(0deg) scale(1)', offset: 1 }
+          ]
+        : [
+            { opacity: 0, transform: `translate3d(${startX}px, ${startY}px, -420px) rotateX(${spinX}deg) rotateY(${spinY}deg) rotateZ(${spinZ}deg) scale(.12)`, offset: 0 },
+            { opacity: .82, transform: `translate3d(${startX * .58}px, ${startY * .58}px, -130px) rotateX(${spinX * .58}deg) rotateY(${spinY * .58}deg) rotateZ(${spinZ * .58}deg) scale(.58)`, offset: .36 },
+            { opacity: 1, transform: `translate3d(0, 13px, 0) rotateX(-12deg) rotateY(0deg) rotateZ(${side * 8}deg) scale(1.26, .72)`, offset: .73 },
+            { opacity: 1, transform: `translate3d(0, -12px, 0) rotateX(8deg) rotateY(0deg) rotateZ(${side * -3}deg) scale(.88, 1.14)`, offset: .86 },
+            { opacity: 1, transform: `translate3d(0, 4px, 0) rotateX(-3deg) rotateY(0deg) scale(1.035, .97)`, offset: .94 },
+            { opacity: 1, transform: 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)', offset: 1 }
+          ];
+      const animation = glyph.element.animate(keyframes, { duration, delay, easing: 'cubic-bezier(.2, 1.15, .34, 1)', fill: 'both' });
       this.introAnimations.push(animation);
     });
 
-    lines.forEach((line, index) => {
+    if (!touchLayout) lines.forEach((line, index) => {
       const word = line.querySelector<HTMLElement>(':scope > span');
       if (!word) return;
       this.introAnimations.push(word.animate([
@@ -153,7 +165,7 @@ export class HeroInteraction {
     this.introAnimations = [];
     this.marker.classList.remove('is-intro');
     this.hero.dataset.heroIntro = 'settled';
-    for (const glyph of this.glyphs) glyph.element.style.transform = 'translate3d(0, 0, 0) rotate(0deg) scale(1)';
+    for (const glyph of this.glyphs) glyph.element.style.transform = 'none';
   }
 
   private prepareGlyphs() {
