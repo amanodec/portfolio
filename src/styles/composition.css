@@ -48,7 +48,7 @@
   .sculpture-orbit { transition: transform 1.5s var(--ease); }
   .sculpture { cursor: pointer; }
   .contact { position: relative; isolation: isolate; overflow: clip; }
-  .contact::before { content: '✳'; position: absolute; right: -6%; top: 4%; z-index: -1; font-size: clamp(300px, 48vw, 850px); line-height: 1; color: #dbd5ca; transform: rotate(calc(var(--contact-enter, 1) * 65deg)); }
+  .contact::before { content: '✳︎'; position: absolute; right: -6%; top: 4%; z-index: -1; font-size: clamp(300px, 48vw, 850px); line-height: 1; color: #dbd5ca; transform: rotate(calc(var(--contact-enter, 1) * 65deg)); }
 }
 @layer motion {
   html[data-motion='full'] .composition { --release: 0; height: 250svh; }

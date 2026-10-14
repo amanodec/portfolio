@@ -124,7 +124,7 @@ export class HeroUnfold {
     this.quantity = summary.count;
     this.root.querySelector<HTMLOutputElement>('[data-hero-quantity]')!.value = String(summary.count);
     this.root.querySelector<HTMLElement>('[data-hero-cart-label]')!.textContent = summary.label;
-    this.root.querySelector<HTMLElement>('[data-hero-total]')!.textContent = summary.count ? `₹${summary.total}` : 'On the menu ↗';
+    this.root.querySelector<HTMLElement>('[data-hero-total]')!.textContent = summary.count ? `₹${summary.total}` : 'On the menu ↗︎';
     this.root.querySelector<HTMLButtonElement>('[data-hero-remove]')!.disabled = summary.count === 0;
     this.root.querySelector<HTMLButtonElement>('[data-hero-add]')!.disabled = summary.count === 9;
     this.product.classList.toggle('has-items', summary.count > 0);

@@ -36,7 +36,7 @@ export class CompositionMotion {
       this.pointer.active = !!art && !document.querySelector('dialog[open]') && !document.body.classList.contains('overlay-open');
       this.cursor.dataset.kind = art?.classList.contains('sculpture') ? 'sculpture' : 'project';
       const unfolded = art?.closest('[data-art-angle="1"]');
-      this.cursor.textContent = art?.classList.contains('sculpture') ? unfolded ? 'REASSEMBLE ↙' : 'UNFOLD ↗' : interactive ? 'EXPLORE ↗' : 'VIEW THE BUILD ↘';
+      this.cursor.textContent = art?.classList.contains('sculpture') ? unfolded ? 'REASSEMBLE ↙︎' : 'UNFOLD ↗︎' : interactive ? 'EXPLORE ↗︎' : 'VIEW THE BUILD ↘︎';
       this.cursor.classList.toggle('is-visible', this.pointer.active);
       this.requestFrame();
     }, { passive: true, signal });
